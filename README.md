@@ -3,7 +3,7 @@
 Linear stairs generator is plugin for the Godot game engine, which provides a node that procedurally generates linear stairs.
 
 ## Installation
-1. Download or clone this repository and copy the contents of the __*addons*__ folder into the __*addons*__ of your project.
+1. Download an archive from the releases section and extract its content into you project folder (__Note:__ Make sure the *addons* folder from the archive is located at the root folder of your project). You can also clone or download the entire repository and copy the *addons* folder to your project's root folder.
 2. Enable the plugin in __*Project Settings/Plugins*__.
 
 ## Usage
