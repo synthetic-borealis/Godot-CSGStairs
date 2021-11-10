@@ -8,20 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "CSGCombiner",
-"class": "CSGLinearStairs",
-"language": "GDScript",
-"path": "res://addons/CSGLinearStairs/scripts/csg_linear_stairs.gd"
-} ]
-_global_script_class_icons={
-"CSGLinearStairs": ""
-}
-
 [application]
 
 config/name="CSGStairs"
 config/icon="res://icon.png"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/linear_stairs/plugin.cfg" )
 
 [physics]
 
