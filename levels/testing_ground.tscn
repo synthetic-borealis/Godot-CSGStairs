@@ -1,3 +1,18 @@
-[gd_scene format=2]
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/linear_stairs/nodes/csg_linear_stairs.gd" type="Script" id=1]
+[ext_resource path="res://materials/juniper_green.tres" type="Material" id=2]
+[ext_resource path="res://levels/testing_ground.gd" type="Script" id=4]
 
 [node name="TestingGround" type="Spatial"]
+script = ExtResource( 4 )
+
+[node name="CSGLinearStairs" type="CSGCombiner" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, -1.49012e-08, 0, 0, 1, 0, 0, 0 )
+use_in_baked_light = true
+script = ExtResource( 1 )
+stairs_amount = 9
+material = ExtResource( 2 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( -0.264799, 0.24958, -0.931446, 1.13133e-08, 0.965926, 0.258819, 0.964304, 0.068535, -0.255776, -4.36581, 2.70309, -2.59794 )

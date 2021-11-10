@@ -82,6 +82,9 @@ func create_new_stair():
 	self.add_child(new_stair)
 	new_stair.set_owner(self)
 	stairs.append(new_stair)
+	
+	if stairs.size() > 1:
+		new_stair.rotation = stairs.front().rotation
 
 func delete_last_stair():
 	stairs.back().queue_free()
