@@ -128,6 +128,13 @@ func adjust_stairs_z_positions():
 		new_z_pos -= (stairs.size() - (i + 1)) * stair_depth
 		stairs[i].position.z = new_z_pos
 
+
+func adjust_stairs_x_positions():
+	for i in range(0, stairs.size()):
+		var new_x_pos = 0
+		stairs[i].position.x = new_x_pos
+
+
 func adjust_stairs_dimensions():
 	adjust_stairs_width()
 	adjust_stairs_depth()
@@ -137,7 +144,7 @@ func adjust_stairs_dimensions():
 func adjust_stairs_positions():
 	adjust_stairs_y_positions()
 	adjust_stairs_z_positions()
-
+	adjust_stairs_x_positions()
 
 func adjust_stairs_materials():
 	for stair in stairs:
