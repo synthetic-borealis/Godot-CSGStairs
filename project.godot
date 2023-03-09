@@ -6,23 +6,24 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
+config_version=5
 
 [application]
 
 config/name="CSGStairs"
 run/main_scene="res://levels/testing_ground.tscn"
+config/features=PackedStringArray("4.0")
 config/icon="res://icon.png"
 
 [display]
 
-window/size/width=1920
-window/size/height=1080
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/size/fullscreen=true
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/linear_stairs/plugin.cfg" )
+enabled=PackedStringArray("res://addons/linear_stairs/plugin.cfg")
 
 [physics]
 
@@ -30,4 +31,4 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-environment/default_environment="res://default_env.tres"
+environment/defaults/default_environment="res://default_env.tres"

@@ -1,13 +1,14 @@
-tool
-extends CSGCombiner
+@tool
+extends CSGCombiner3D
 
 
 # Properties
-export(int) var stairs_amount = 1 setget stairs_amount_set, stairs_amount_get
-export(float) var stairs_width = 2.0 setget stairs_width_set, stairs_width_get
-export(float) var stair_height = 0.15 setget stair_height_set, stair_height_get
-export(float) var stair_depth = 0.3 setget stair_depth_set, stair_depth_get
-export(Material) var material = null setget material_set, material_get
+@export_category("Stairs Config")
+@export var stairs_amount: int = 1 : set = stairs_amount_set, get = stairs_amount_get
+@export var stairs_width: float = 2.0 : set = stairs_width_set, get = stairs_width_get
+@export var stair_height: float = 0.15 : set = stair_height_set, get = stair_height_get
+@export var stair_depth: float = 0.3 : set = stair_depth_set, get = stair_depth_get
+@export var material: Material = null : set = material_set, get = material_get
 
 # Internal variables
 var stairs = []
@@ -67,7 +68,7 @@ func material_get():
 
 # Called when the node enters the scene tree for the first time.
 func _init():
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		delete_all_stairs()
 		delete_all_child_nodes() # boop
 	reset_stairs()
@@ -75,13 +76,13 @@ func _init():
 
 # Creating & destroying stairs
 func create_new_stair():
-	var new_stair = CSGBox.new()
-	new_stair.transform = self.transform
+	var new_stair = CSGBox3D.new()
 	new_stair.name = "Stair{index}".format({"index": stairs.size() + 1})
 	new_stair.material = material
 	self.add_child(new_stair)
 	new_stair.set_owner(self)
 	stairs.append(new_stair)
+	new_stair.transform = self.transform
 	
 	if stairs.size() > 1:
 		new_stair.rotation = stairs.front().rotation
@@ -118,14 +119,21 @@ func adjust_stairs_height():
 func adjust_stairs_y_positions():
 	for i in range(0, stairs.size()):
 		var new_y_pos = (stair_height / 2) + (i * stair_height)
-		stairs[i].translation.y = new_y_pos
+		stairs[i].position.y = new_y_pos
 
 
 func adjust_stairs_z_positions():
 	for i in range(0, stairs.size()):
-		var new_z_pos = self.translation.z - (stair_depth / 2)
-		new_z_pos -= (stairs.size() - (i + 1)) * stair_depth
-		stairs[i].translation.z = new_z_pos
+		var new_z_pos = 0
+		new_z_pos -= (stairs.size() - (i + 1)) * stair_depth + stair_depth / 2
+		stairs[i].position.z = new_z_pos
+
+
+func adjust_stairs_x_positions():
+	for i in range(0, stairs.size()):
+		var new_x_pos = 0
+		stairs[i].position.x = new_x_pos
+
 
 func adjust_stairs_dimensions():
 	adjust_stairs_width()
@@ -136,7 +144,7 @@ func adjust_stairs_dimensions():
 func adjust_stairs_positions():
 	adjust_stairs_y_positions()
 	adjust_stairs_z_positions()
-
+	adjust_stairs_x_positions()
 
 func adjust_stairs_materials():
 	for stair in stairs:
@@ -145,7 +153,6 @@ func adjust_stairs_materials():
 
 func reset_stairs():
 	var previous_size = stairs.size()
-	
 	if stairs.size() > stairs_amount:
 		while stairs.size() > stairs_amount:
 			delete_last_stair()
