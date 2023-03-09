@@ -4,15 +4,15 @@
 [ext_resource path="res://materials/juniper_green.tres" type="Material" id=2]
 [ext_resource path="res://levels/testing_ground.gd" type="Script" id=4]
 
-[node name="TestingGround" type="Spatial"]
+[node name="TestingGround" type="Node3D"]
 script = ExtResource( 4 )
 
-[node name="CSGLinearStairs" type="CSGCombiner" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, -1.49012e-08, 0, 0, 1, 0, 0, 0 )
+[node name="CSGLinearStairs" type="CSGCombiner3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, -1.49012e-08, 0, 0, 1, 0, 0, 0 )
 use_in_baked_light = true
 script = ExtResource( 1 )
 stairs_amount = 9
 material = ExtResource( 2 )
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( -0.264799, 0.24958, -0.931446, 1.13133e-08, 0.965926, 0.258819, 0.964304, 0.068535, -0.255776, -4.36581, 2.70309, -2.59794 )
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D( -0.264799, 0.24958, -0.931446, 1.13133e-08, 0.965926, 0.258819, 0.964304, 0.068535, -0.255776, -4.36581, 2.70309, -2.59794 )
