@@ -125,7 +125,7 @@ func adjust_stairs_y_positions():
 func adjust_stairs_z_positions():
 	for i in range(0, stairs.size()):
 		var new_z_pos = 0
-		new_z_pos -= (stairs.size() - (i + 1)) * stair_depth
+		new_z_pos -= (stairs.size() - (i + 1)) * stair_depth + stair_depth / 2
 		stairs[i].position.z = new_z_pos
 
 
