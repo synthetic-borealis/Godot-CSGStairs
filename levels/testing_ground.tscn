@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cgtptg5gllf6"]
+[gd_scene format=3 uid="uid://cgtptg5gllf6"]
 
-[ext_resource type="Script" path="res://addons/linear_stairs/nodes/csg_linear_stairs.gd" id="1"]
+[ext_resource type="Script" uid="uid://dxcl63qe04csx" path="res://addons/linear_stairs/nodes/csg_linear_stairs.gd" id="1"]
 [ext_resource type="Material" path="res://materials/juniper_green.tres" id="2"]
-[ext_resource type="Script" path="res://levels/testing_ground.gd" id="4"]
+[ext_resource type="Script" uid="uid://cf1yge3qq1lkt" path="res://levels/testing_ground.gd" id="4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gwx3i"]
 
@@ -13,22 +13,22 @@ sky_material = SubResource("ProceduralSkyMaterial_gwx3i")
 background_mode = 2
 sky = SubResource("Sky_bossn")
 
-[node name="TestingGround" type="Node3D"]
+[node name="TestingGround" type="Node3D" unique_id=1758349919]
 script = ExtResource("4")
 
-[node name="CSGLinearStairs" type="CSGCombiner3D" parent="."]
+[node name="CSGLinearStairs" type="CSGCombiner3D" parent="." unique_id=274221098]
 transform = Transform3D(1, 0, 0, 0, 1, -1.49012e-08, 0, 0, 1, 0, 0, 0)
 script = ExtResource("1")
 stairs_amount = 9
 material = ExtResource("2")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1748703494]
 transform = Transform3D(-0.264799, 0.24958, -0.931446, 1.13133e-08, 0.965926, 0.258819, 0.964304, 0.0685349, -0.255776, -4.36581, 2.70309, -2.59794)
 current = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=20077539]
 environment = SubResource("Environment_qngy7")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=326064802]
 transform = Transform3D(-0.517445, 0.549472, -0.655997, 0, 0.766605, 0.642119, 0.855717, 0.332261, -0.396676, 0, 2.8174, -6.25049)
 light_energy = 2.0

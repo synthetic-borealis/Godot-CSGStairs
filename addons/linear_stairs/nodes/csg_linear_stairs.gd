@@ -2,8 +2,12 @@
 extends CSGCombiner3D
 
 
+enum StairsStyle { MULTIPLE_BOXES, SOLID }
+
+
 # Properties
 @export_category("Stairs Config")
+@export var stairs_style: StairsStyle = StairsStyle.SOLID : set = stairs_set_style, get = stairs_get_style
 @export var stairs_amount: int = 1 : set = stairs_amount_set, get = stairs_amount_get
 @export var stairs_width: float = 2.0 : set = stairs_width_set, get = stairs_width_get
 @export var stair_height: float = 0.15 : set = stair_height_set, get = stair_height_get
@@ -12,6 +16,17 @@ extends CSGCombiner3D
 
 # Internal variables
 var stairs = []
+
+
+# stairs_style setter/getter
+func stairs_set_style(new_style):
+	stairs_style = new_style
+	adjust_stairs_depth()
+	adjust_stairs_z_positions()
+	
+	
+func stairs_get_style():
+	return stairs_style
 
 
 # stairs_amount setter/getter
@@ -105,10 +120,17 @@ func delete_all_child_nodes():
 func adjust_stairs_width():
 	for stair in stairs:
 		stair.width = stairs_width
+		
+
+func compute_stair_box_depth(stair_index):
+	if stairs_style == StairsStyle.MULTIPLE_BOXES:
+		return stair_depth
+		
+	return (stairs_amount - stair_index) * stair_depth
 
 func adjust_stairs_depth():
-	for stair in stairs:
-		stair.depth = stair_depth
+	for i in len(stairs):
+		stairs[i].depth = compute_stair_box_depth(i)
 
 
 func adjust_stairs_height():
@@ -125,7 +147,10 @@ func adjust_stairs_y_positions():
 func adjust_stairs_z_positions():
 	for i in range(0, stairs.size()):
 		var new_z_pos = 0
-		new_z_pos -= (stairs.size() - (i + 1)) * stair_depth + stair_depth / 2
+		if stairs_style == StairsStyle.MULTIPLE_BOXES:
+			new_z_pos -= (stairs.size() - (i + 1)) * stair_depth + stair_depth / 2
+		else:
+			new_z_pos -= compute_stair_box_depth(i) / 2
 		stairs[i].position.z = new_z_pos
 
 
