@@ -1,6 +1,6 @@
-   CSG Linear Stairs
+   Linear Stairs Generator
 =============================
-CSG Linear Stairs is plugin for the Godot game engine, which provides a node that procedurally generates linear stairs.
+Linear Stairs Generator is plugin for the Godot game engine, which provides a node that procedurally generates linear stairs.
 
 ## Installation
 1. Download an archive from the releases section and extract its content into you project folder (__Note:__ Make sure the *addons* folder from the archive is located at the root folder of your project). You can also clone or download the entire repository and copy the *addons* folder to your project's root folder.
