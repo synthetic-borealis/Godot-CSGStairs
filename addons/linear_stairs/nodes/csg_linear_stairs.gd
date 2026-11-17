@@ -2,20 +2,20 @@
 extends CSGCombiner3D
 
 
-enum StairsStyle { MULTIPLE_BOXES, SOLID }
+enum StairsStyle {MULTIPLE_BOXES, SOLID}
 
 
 # Properties
 @export_category("Stairs Config")
-@export var stairs_style: StairsStyle = StairsStyle.SOLID : set = stairs_set_style, get = stairs_get_style
-@export var stairs_amount: int = 1 : set = stairs_amount_set, get = stairs_amount_get
-@export var stairs_width: float = 2.0 : set = stairs_width_set, get = stairs_width_get
-@export var stair_height: float = 0.15 : set = stair_height_set, get = stair_height_get
-@export var stair_depth: float = 0.3 : set = stair_depth_set, get = stair_depth_get
-@export var material: Material = null : set = material_set, get = material_get
+@export var stairs_style: StairsStyle = StairsStyle.SOLID: set = stairs_set_style, get = stairs_get_style
+@export var stairs_amount: int = 1: set = stairs_amount_set, get = stairs_amount_get
+@export var stairs_width: float = 2.0: set = stairs_width_set, get = stairs_width_get
+@export var stair_height: float = 0.15: set = stair_height_set, get = stair_height_get
+@export var stair_depth: float = 0.3: set = stair_depth_set, get = stair_depth_get
+@export var material: Material = null: set = material_set, get = material_get
 
 # Internal variables
-var stairs = []
+var stairs: Array[CSGBox3D] = []
 
 
 # stairs_style setter/getter
@@ -91,7 +91,7 @@ func _init():
 
 # Creating & destroying stairs
 func create_new_stair():
-	var new_stair = CSGBox3D.new()
+	var new_stair: CSGBox3D = CSGBox3D.new()
 	new_stair.name = "Stair{index}".format({"index": stairs.size() + 1})
 	new_stair.material = material
 	self.add_child(new_stair)
@@ -118,7 +118,7 @@ func delete_all_child_nodes():
 
 # Setting stair properties
 func adjust_stairs_width():
-	for stair in stairs:
+	for stair: CSGBox3D in stairs:
 		stair.width = stairs_width
 		
 
@@ -129,35 +129,35 @@ func compute_stair_box_depth(stair_index):
 	return (stairs_amount - stair_index) * stair_depth
 
 func adjust_stairs_depth():
-	for i in len(stairs):
+	for i in range(stairs.size()):
 		stairs[i].depth = compute_stair_box_depth(i)
 
 
 func adjust_stairs_height():
-	for stair in stairs:
+	for stair: CSGBox3D in stairs:
 		stair.height = stair_height
 
 
 func adjust_stairs_y_positions():
-	for i in range(0, stairs.size()):
-		var new_y_pos = (stair_height / 2) + (i * stair_height)
-		stairs[i].position.y = new_y_pos
+	for i in range(stairs.size()):
+		var new_y_position: float = (stair_height / 2) + (i * stair_height)
+		stairs[i].position.y = new_y_position
 
 
 func adjust_stairs_z_positions():
-	for i in range(0, stairs.size()):
-		var new_z_pos = 0
+	for i in range(stairs.size()):
+		var new_z_position: float = 0
 		if stairs_style == StairsStyle.MULTIPLE_BOXES:
-			new_z_pos -= (stairs.size() - (i + 1)) * stair_depth + stair_depth / 2
+			new_z_position -= (stairs.size() - (i + 1)) * stair_depth + stair_depth / 2
 		else:
-			new_z_pos -= compute_stair_box_depth(i) / 2
-		stairs[i].position.z = new_z_pos
+			new_z_position -= compute_stair_box_depth(i) / 2
+		stairs[i].position.z = new_z_position
 
 
 func adjust_stairs_x_positions():
-	for i in range(0, stairs.size()):
-		var new_x_pos = 0
-		stairs[i].position.x = new_x_pos
+	for i in range(stairs.size()):
+		var new_x_position: float = 0
+		stairs[i].position.x = new_x_position
 
 
 func adjust_stairs_dimensions():
@@ -172,12 +172,12 @@ func adjust_stairs_positions():
 	adjust_stairs_x_positions()
 
 func adjust_stairs_materials():
-	for stair in stairs:
+	for stair: CSGBox3D in stairs:
 		stair.material = material
 
 
 func reset_stairs():
-	var previous_size = stairs.size()
+	var previous_size: int = stairs.size()
 	if stairs.size() > stairs_amount:
 		while stairs.size() > stairs_amount:
 			delete_last_stair()
