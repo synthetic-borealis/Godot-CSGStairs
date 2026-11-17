@@ -97,7 +97,7 @@ func create_new_stair():
 	self.add_child(new_stair)
 	new_stair.set_owner(self)
 	stairs.append(new_stair)
-	new_stair.transform = self.transform
+	new_stair.transform = Transform3D.IDENTITY
 	
 	if stairs.size() > 1:
 		new_stair.rotation = stairs.front().rotation
